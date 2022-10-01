@@ -45,3 +45,7 @@ Thumbs.db
 nbproject/*
 # Visual Studio Code
 .vscode
+
+#evs
+.env
+!.env.example
