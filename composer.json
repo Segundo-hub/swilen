@@ -1,0 +1,29 @@
+{
+    "name": "swilen/swilen",
+    "description": "The Swilen Framework",
+    "license": "MIT",
+    "type": "project",
+    "keywords": ["framework", "swilen"],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {
+        "php": ">=7.3",
+        "swilen/framework": "dev-main"
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.21"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

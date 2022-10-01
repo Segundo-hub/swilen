@@ -1,0 +1,31 @@
+####
+@BASE_URL = http://swilen.test/api
+
+#### ============================ AUTHENTICATION ========================== #######
+
+### @name REGISTER
+POST {{BASE_URL}}/users/sign-in
+Content-Type: application/json
+
+{
+    "username": "mercurio",
+    "email": "example@gmail.com",
+    "password": "example-password"
+}
+
+### @name LOGIN
+POST {{BASE_URL}}/users/sign-up
+Content-Type: application/json
+
+{
+    "username": "mercurio",
+    "email": "example@gmail.com",
+    "password": "example-password"
+}
+
+#### ============================ PAYMENTS ================================== ######
+
+#### @name PAYMENTS_GET_ALL
+GET {{BASE_URL}}/payments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ2MDc1MDcsImV4cCI6MTY2NDYwNzY4NywiZGF0YSI6eyJpZCI6NywibmFtZSI6Im1lcmN1cmlvIiwicm9sZSI6ImFkbWluIn19.JsaIA4zm2awsxfRVzwikAwQ3Q0hJwE6EBy0sMmYFc2I
+Content-Type: application/json
