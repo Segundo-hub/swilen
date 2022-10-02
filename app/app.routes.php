@@ -4,7 +4,7 @@ use App\Shared\Http\Middleware\Authenticate;
 use Swilen\Petiole\Facades\Route;
 
 /* ------------------------------------------------------------------- */
-/*  Swilen application routes definition                               */
+/*  Swilen routes definition                                           */
 /* ------------------------------------------------------------------- */
 
 Route::prefix('users')->group(function () {

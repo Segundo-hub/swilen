@@ -9,7 +9,7 @@ final class PaymentService
     public function all()
     {
         return DB::select(
-            "SELECT py.*, concat(ct.first_name, ' ', ct.last_name) `owner` from payments py inner join customer ct on ct.id = py.customer_id"
+            "SELECT py.*, concat(ct.first_name, ' ', ct.last_name) `owner` from paymentss py inner join customer ct on ct.id = py.customer_id"
         );
     }
 

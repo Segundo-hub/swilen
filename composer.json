@@ -16,6 +16,11 @@
     "require-dev": {
         "pestphp/pest": "^1.21"
     },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
