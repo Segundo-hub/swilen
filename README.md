@@ -6,7 +6,7 @@ It's recommended that you use [Composer](https://getcomposer.org/) to create Swi
 This will create a Swilen project with all the required dependencies. Swilen requires PHP 7.3 or later.
 
 ```bash
-$ composer create-project swilen/swilen swilen
+$ composer create-project swilen/swilen:dev-main swilen
 ```
 
 ## Project structure
