@@ -11,7 +11,7 @@ $app = new Swilen\Arthropod\Application(
 
 /*
 |--------------------------------------------------------------------------
-| register exception handler
+| Register exception handler
 |--------------------------------------------------------------------------
 */
 $app->singleton(

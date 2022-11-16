@@ -1,8 +1,4 @@
-# Swilen Framework
-
-`v0.5.0-alpha`
-
-Fast, minimalist and flexible PHP framework inspired in [Laravel](https://laravel.com) and [Expressjs](https://expressjs.com)
+# Swilen Framework Template
 
 ## Create project
 
