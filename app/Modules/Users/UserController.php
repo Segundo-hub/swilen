@@ -21,7 +21,7 @@ final class UserController extends Controller
     }
 
     /**
-     * User register controller
+     * User register controller.
      *
      * @param \Swilen\Http\Request $request
      *
@@ -29,10 +29,10 @@ final class UserController extends Controller
      */
     public function userSignIn(Request $request)
     {
-        $user = request()->validate([
+        $user = $request->validate([
             'username' => 'required|string',
             'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         if ($user->fails()) {
@@ -45,7 +45,7 @@ final class UserController extends Controller
     }
 
     /**
-     * User login controller
+     * User login controller.
      *
      * @param \Swilen\Http\Request $request
      *
@@ -56,15 +56,19 @@ final class UserController extends Controller
         $user = $request->validate([
             'username' => 'required|string',
             'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         if ($user->fails()) {
             return response()->send($user->errors());
         }
 
-        $data = $this->service->login($user);
+        if ($data = $this->service->login($user->email, $user->password)) {
+            return response()->send([
+                'message' => 'Password or username do not match',
+            ], 401);
+        }
 
-        return $data;
+        return response()->send($data);
     }
 }

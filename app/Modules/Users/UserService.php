@@ -3,58 +3,59 @@
 namespace App\Modules\Users;
 
 use Swilen\Petiole\Facades\DB;
-use App\Shared\Providers\TokenManager;
+use Swilen\Petiole\Facades\TokenManager;
+use Swilen\Security\Hashing\Hash;
 
 final class UserService
 {
     /**
-     * @var \App\Shared\Providers\TokenManager
+     * Login user to system.
+     *
+     * @param string $email
+     * @param string $password
+     *
+     * @return bool|array
      */
-    protected $tokenManager;
-
-    /**
-     * @param \App\Shared\Providers\TokenManager $tokenManager
-     */
-    public function __construct(TokenManager $tokenManager)
+    public function login(string $email, string $password)
     {
-        $this->tokenManager = $tokenManager;
-    }
-
-    public function login($user)
-    {
-        if (!$userModel = DB::selectOne('SELECT * FROM users where email = ?', [$user->email])) {
-            return 'User not found';
+        if (!$user = DB::selectOne('SELECT * FROM users where email = ?', [$email])) {
+            return false;
         }
 
-        if (password_verify($user->password, $userModel->password) === false) {
-            return 'Password mismatch';
+        if (!Hash::check($password, $user->password)) {
+            return false;
         }
 
-        $response = $this->tokenManager->sign([
-            'id'       => $userModel->id,
-            'username' => $userModel->username,
-            'email'    => $userModel->email,
-            'role'     => 'admin'
+        $response = TokenManager::sign([
+            'id' => $user->id,
+            'username' => $user->username,
+            'email' => $user->email,
+            'role' => 'admin',
         ]);
 
         return $response;
     }
 
+    /**
+     * Register user and store to database.
+     *
+     * @param object $user
+     *
+     * @return array
+     */
     public function store($user)
     {
-        $hashedPassword = password_hash($user->password, PASSWORD_DEFAULT);
-
         $userId = DB::insert('INSERT INTO users (username, email, `password`) VALUES(?,?,?)', [
             $user->username,
             $user->email,
-            $hashedPassword
+            Hash::make($user->password),
         ]);
 
-        $response = $this->tokenManager->sign([
-            'id'    => $userId,
-            'name'  => $user->username,
+        $response = TokenManager::sign([
+            'id' => $userId,
+            'name' => $user->username,
             'email' => $user->email,
-            'role'  => 'admin'
+            'role' => 'admin',
         ]);
 
         return $response;

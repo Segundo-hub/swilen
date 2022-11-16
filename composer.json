@@ -3,7 +3,10 @@
     "description": "The Swilen Framework",
     "license": "MIT",
     "type": "project",
-    "keywords": ["framework", "swilen"],
+    "keywords": [
+        "framework",
+        "swilen"
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/"

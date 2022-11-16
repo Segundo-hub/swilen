@@ -7,29 +7,32 @@ define('SWILEN_START', microtime(true));
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 */
-
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
 | Require Swilen Application instance
 |--------------------------------------------------------------------------
 */
-
-$swilen = require_once __DIR__ . '/../app/app.php';
+$swilen = require_once __DIR__.'/../app/app.php';
 
 /*
 |--------------------------------------------------------------------------
-| Create new request instance from base
+| Create new request instance from PHP superglobals
 |--------------------------------------------------------------------------
 */
-
 $request = Swilen\Http\Request::create();
 
 /*
 |--------------------------------------------------------------------------
-| Run The Application
+| Handle the incoming request and retrieve the response
 |--------------------------------------------------------------------------
 */
+$response = $swilen->handle($request);
 
-$swilen->dispatch($request);
+/*
+|--------------------------------------------------------------------------
+| Terminate application response
+|--------------------------------------------------------------------------
+*/
+$response->terminate();
